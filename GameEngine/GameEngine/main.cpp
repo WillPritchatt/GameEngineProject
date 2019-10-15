@@ -1,12 +1,15 @@
 #include <SDL.h>
+#include <string>
 #undef main
 
 void main()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	SDL_Window* p_window = SDL_CreateWindow("My win", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
+	int WinWidth = 800;
+	int WinHeight = 600;
 
+	SDL_Window* p_window = SDL_CreateWindow("My win", 100, 100, WinWidth, WinHeight, SDL_WINDOW_SHOWN);
 
 	SDL_Renderer* p_Renderer = SDL_CreateRenderer(p_window, -1, SDL_RENDERER_ACCELERATED);
 
@@ -29,6 +32,8 @@ void main()
 				}
 			}
 		}
+
+
 
 		SDL_RenderClear(p_Renderer);
 

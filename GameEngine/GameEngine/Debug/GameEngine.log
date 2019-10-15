@@ -1,3 +1,2 @@
-﻿  main.cpp
-C:\Users\Games\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\main.cpp(5,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
+﻿  bitmap.cpp
   GameEngine.vcxproj -> C:\Users\Games\Documents\GitHub\GameEngineProject\GameEngine\Debug\GameEngine.exe
