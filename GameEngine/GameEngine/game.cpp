@@ -57,23 +57,26 @@ game::~game()
 	}
 }
 
-void game::SetDisplayColour(void)
+void game::GameUpdate(void)
+{
+	// Do this once
+	SDL_RenderClear(m_Renderer);
+
+	SDL_RenderPresent(m_Renderer);
+
+	SDL_Delay(16);
+}
+
+void game::SetDisplayColour(int r, int g, int b, int a)
 {
 	if (m_Renderer)
 	{
 		int result = SDL_SetRenderDrawColor(
 			m_Renderer,      // our target renderer
-			225,             // r
-			0,               // b
-			0,				 // g
-			255				 // alpha
+			r,               // r
+			g,               // b
+			b,				 // g
+			a				 // alpha
 			);
-
-		SDL_RenderClear(m_Renderer);
-
-		SDL_RenderPresent(m_Renderer);
-
-		SDL_Delay(5000);
-
 	}
 }

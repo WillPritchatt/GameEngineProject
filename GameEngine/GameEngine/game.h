@@ -12,7 +12,9 @@ public:
 	game();
 	~game();
 
-	void SetDisplayColour(void);
+	void GameUpdate(void);
+
+	void SetDisplayColour(int r, int g, int b, int a);
 };
 
 #endif
