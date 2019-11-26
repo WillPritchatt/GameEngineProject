@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
 				if (++g > 255) g = 0;
 			}
 
-			if (Input->KeyIsPressed(KEY_B))
+			if (Input->KeyIsPressed(KEY_B)) 
 			{
 				if (++b > 255) b = 0;
 			}
