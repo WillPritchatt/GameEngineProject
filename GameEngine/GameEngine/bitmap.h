@@ -5,7 +5,7 @@
 struct SDL_Surface;
 struct SDL_Texture;
 struct SDL_Renderer;
-using namespace std; //I keep screaming but c++ won't hear me
+using namespace std;
 class bitmap
 {
 private:
@@ -22,7 +22,4 @@ public:
 	void Draw();
 };
 
-class Bitmap
-{
-};
 

@@ -1,2 +1,5 @@
-﻿  input.cpp
+﻿  bitmap.cpp
+  game.cpp
+  main.cpp
+  Generating Code...
   GameEngine.vcxproj -> C:\Users\Games\Documents\GitHub\GameEngineProject\GameEngine\Debug\GameEngine.exe

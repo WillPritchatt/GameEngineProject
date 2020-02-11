@@ -40,7 +40,7 @@ void bitmap::Draw()
 {
 	if (m_pBitmapTexture)
 	{
-		SDL_Rect destRect = { m_x, m_y, m_pBitmapSurface->h };
+		SDL_Rect destRect = { m_x, m_y, m_pBitmapSurface->w, m_pBitmapSurface->h };
 		SDL_RenderCopy(m_pRenderer, m_pBitmapTexture, NULL, &destRect);
 	}
 }

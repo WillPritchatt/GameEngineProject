@@ -1,12 +1,17 @@
 #include "game.h"
+#include "bitmap.h"
 #include <string>
 
 #include<SDL.h>
 
 game::game()
 {
+	//SDL stuff
 	m_Window = nullptr;
 	m_Renderer = nullptr;
+
+	m_PlayerX = 50;
+	m_PlayerY = 50;
 
 	//start_up
 	SDL_Init(SDL_INIT_VIDEO);
@@ -16,8 +21,8 @@ game::game()
 		"My First Window", // title
 		250,               // initial x position
 		50,                // initial y position
-		640,               // width in pixels
-		480,               // height in pixels
+		1024,               // width in pixels
+		860,               // height in pixels
 		0                  // window behavior flags
 		);
 
@@ -42,10 +47,16 @@ game::game()
 		getchar();
 		return;
 	}
+	m_Machokip = new bitmap(m_Renderer, "../Assets/Sprites/Machokip.bmp", m_PlayerX, m_PlayerY, true);
 }
 
 game::~game()
 {
+	if (m_Machokip) 
+	{
+		delete m_Machokip;
+	}
+
 	if (m_Renderer)
 	{
 		SDL_DestroyRenderer(m_Renderer);
@@ -61,6 +72,8 @@ void game::GameUpdate(void)
 {
 	// Do this once
 	SDL_RenderClear(m_Renderer);
+
+	m_Machokip->Draw();
 
 	SDL_RenderPresent(m_Renderer);
 

@@ -2,6 +2,7 @@
 #include <string>
 #include "game.h"
 #include "input.h"
+#include "bitmap.h"
 #undef main
 
 int main(int argc, char* argv[])
@@ -9,38 +10,59 @@ int main(int argc, char* argv[])
 	game* Game = new game();
 	input* Input = new input();
 
-	if (Game&&Input)
+	Uint8 r = 127, g = 127, b = 127, a = 255;
+
+	while (Game&&Input)
 	{
-
-		Uint8 r = 127, g = 127, b = 127, a = 255;
-		while (!Input->KeyIsPressed(KEY_ESCAPE)) 
+		Input->Update();
+		if (Input->KeyIsPressed(SDL_SCANCODE_R)) 
 		{
-			Input->Update();
-
-			if (Input->KeyIsPressed(KEY_R)) 
-			{
-				if (++r > 255) r = 0;
-			}
-
-			if (Input->KeyIsPressed(KEY_G)) 
-			{
-				if (++g > 255) g = 0;
-			}
-
-			if (Input->KeyIsPressed(KEY_B)) 
-			{
-				if (++b > 255) b = 0;
-			}
-			Game->SetDisplayColour(r, g, b, a);
-			Game->GameUpdate();
+			r++;
+			if (++r > 255) r = 0;
 		}
 
-		delete Game;
-		Game = nullptr;
+		if (Input->KeyIsPressed(SDL_SCANCODE_G))
+		{
+			g++;
+			if (++g > 255) g = 0;
+		}
 
-		delete Input;
-		Input = nullptr;
+		if (Input->KeyIsPressed(SDL_SCANCODE_B))
+		{
+			b++;
+			if (++b > 255) b = 0;
+		}
+
+		if (Input->KeyIsPressed(SDL_SCANCODE_W))
+		{
+			
+		}
+
+		if (Input->KeyIsPressed(SDL_SCANCODE_A))
+		{
+
+		}
+
+		if (Input->KeyIsPressed(SDL_SCANCODE_S))
+		{
+
+		}
+
+		if (Input->KeyIsPressed(SDL_SCANCODE_D))
+		{
+			
+		}
+
+
+		Game->SetDisplayColour(r, g, b, a);
+		Game->GameUpdate();
 	}
+
+	delete Game;
+	Game = nullptr;
+
+	delete Input;
+	Input = nullptr;
 
 	return 0;
 }

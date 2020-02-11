@@ -3,13 +3,14 @@
 
 void input::Update(void)
 {
+	m_keyboardState = SDL_GetKeyboardState(NULL);
 	while (SDL_PollEvent(&m_event) != NULL)
 	{
 		//check for key down
 		if (m_event.type == SDL_KEYDOWN) 
 		{
 			SDL_Keycode keyPressed = m_event.key.keysym.sym;
-
+			
 			switch (keyPressed)
 			{
 			case SDLK_ESCAPE:
@@ -53,9 +54,9 @@ void input::Update(void)
 	}
 }
 
-bool input::KeyIsPressed(KEYS_PRESSED_LIST key)
+bool input::KeyIsPressed(SDL_Scancode key)
 {
-	return false;
+	return m_keyboardState[key];
 }
 
 input::input()
