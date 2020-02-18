@@ -20,6 +20,8 @@ public:
 	~bitmap();
 
 	void Draw();
+
+	void SetPos(int X, int Y);
 };
 
 

@@ -21,13 +21,18 @@
   <ItemGroup>
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="movementComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmap.h" />
+    <ClInclude Include="componentBase.hpp" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gameObject.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="movementComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

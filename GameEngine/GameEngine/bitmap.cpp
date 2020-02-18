@@ -45,6 +45,12 @@ void bitmap::Draw()
 	}
 }
 
+void bitmap::SetPos(int X, int Y)
+{
+	m_x = X;
+	m_y = Y;
+}
+
 bitmap::~bitmap()
 {
 	if (m_pBitmapTexture) 

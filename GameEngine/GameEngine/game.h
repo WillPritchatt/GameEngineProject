@@ -16,10 +16,10 @@ private:
 	int m_PlayerY;
 
 public:
-	game();
+	game(int X, int Y);
 	~game();
 
-	void GameUpdate(void);
+	void GameUpdate(int posX, int posY);
 
 	void SetDisplayColour(int r, int g, int b, int a);
 };

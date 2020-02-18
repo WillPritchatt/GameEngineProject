@@ -4,7 +4,7 @@
 
 #include<SDL.h>
 
-game::game()
+game::game(int X, int Y)
 {
 	//SDL stuff
 	m_Window = nullptr;
@@ -18,7 +18,7 @@ game::game()
 
 	//create the window
 	m_Window = SDL_CreateWindow(
-		"My First Window", // title
+		"The Machokip", // title
 		250,               // initial x position
 		50,                // initial y position
 		1024,               // width in pixels
@@ -47,6 +47,7 @@ game::game()
 		getchar();
 		return;
 	}
+
 	m_Machokip = new bitmap(m_Renderer, "../Assets/Sprites/Machokip.bmp", m_PlayerX, m_PlayerY, true);
 }
 
@@ -68,10 +69,12 @@ game::~game()
 	}
 }
 
-void game::GameUpdate(void)
+void game::GameUpdate(int posX, int posY)
 {
 	// Do this once
 	SDL_RenderClear(m_Renderer);
+
+	m_Machokip->SetPos(posX, posY);
 
 	m_Machokip->Draw();
 

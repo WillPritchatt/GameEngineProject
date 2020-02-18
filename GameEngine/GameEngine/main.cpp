@@ -3,11 +3,15 @@
 #include "game.h"
 #include "input.h"
 #include "bitmap.h"
+#include "gameObject.h"
 #undef main
 
 int main(int argc, char* argv[])
 {
-	game* Game = new game();
+	int PlayerStartX = 50;
+	int PlayerStartY = 50;
+
+	game* Game = new game(PlayerStartX, PlayerStartY);
 	input* Input = new input();
 
 	Uint8 r = 127, g = 127, b = 127, a = 255;
@@ -35,27 +39,27 @@ int main(int argc, char* argv[])
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_W))
 		{
-			
+			PlayerStartY -= 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_A))
 		{
-
+			PlayerStartX -= 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_S))
 		{
-
+			PlayerStartY += 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_D))
 		{
-			
+			PlayerStartX += 1;
 		}
 
 
 		Game->SetDisplayColour(r, g, b, a);
-		Game->GameUpdate();
+		Game->GameUpdate(PlayerStartX, PlayerStartY);
 	}
 
 	delete Game;
