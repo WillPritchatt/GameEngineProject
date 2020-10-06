@@ -1,1 +1,2 @@
-﻿LINK : fatal error LNK1104: cannot open file 'SDL2.lib'
+﻿  game.cpp
+  GameEngine.vcxproj -> C:\Users\Administrator\Documents\Github\GameEngineProject\GameEngine\x64\Debug\GameEngine.exe
