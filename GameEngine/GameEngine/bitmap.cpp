@@ -1,10 +1,6 @@
 #include "bitmap.h"
 #include <string>
 
-#include <SDL.h>
-#include <SDL_render.h>
-
-
 
 bitmap::bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool useTransparency)
 {

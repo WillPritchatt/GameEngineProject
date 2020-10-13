@@ -26,6 +26,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="movementComponent.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmap.h" />
@@ -35,6 +36,8 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="movementComponent.h" />
+    <ClInclude Include="ResourceManager.hpp" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
