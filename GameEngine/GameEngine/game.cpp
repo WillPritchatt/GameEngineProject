@@ -109,6 +109,11 @@ void game::GameUpdate(int posX, int posY)
 	SDL_Delay(16);
 }
 
+void game::SpawnBitmap(int posX, int posY)
+{
+	m_Machokip = new bitmap(m_Renderer, "../Assets/Sprites/Machokip.bmp", m_PlayerX, m_PlayerY, true);
+}
+
 void game::SetDisplayColour(int r, int g, int b, int a)
 {
 	if (m_Renderer)

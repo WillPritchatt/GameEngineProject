@@ -28,6 +28,8 @@ public:
 
 	void GameUpdate(int posX, int posY);
 
+	void SpawnBitmap(int posX, int posY);
+
 	void SetDisplayColour(int r, int g, int b, int a);
 };
 #endif

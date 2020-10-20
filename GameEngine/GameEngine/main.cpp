@@ -57,6 +57,11 @@ int main(int argc, char* argv[])
 			PlayerStartX += 1;
 		}
 
+		if (Input->KeyIsPressed(SDL_SCANCODE_SPACE))
+		{
+			Game->SpawnBitmap(50, 50);
+		}
+
 
 		Game->SetDisplayColour(r, g, b, a);
 		Game->GameUpdate(PlayerStartX, PlayerStartY);

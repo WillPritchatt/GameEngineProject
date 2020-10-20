@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <string>
 #include <SDL.h>
 #include <SDL_render.h>
@@ -20,6 +21,9 @@ private:
 public:
 	bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool useTransparency = false);
 	~bitmap();
+
+	SDL_Texture* Load(std::string fileName);
+	std::map<std::string, SDL_Texture*> textures;
 
 	void Draw();
 
