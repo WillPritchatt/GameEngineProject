@@ -4,6 +4,7 @@
 #include "input.h"
 #include "bitmap.h"
 #include "gameObject.h"
+#include "EntityManager.h"
 #undef main
 
 int main(int argc, char* argv[])
@@ -13,6 +14,8 @@ int main(int argc, char* argv[])
 
 	game* Game = new game(PlayerStartX, PlayerStartY);
 	input* Input = new input();
+
+	EntityManager* Ents = new EntityManager();
 
 	Uint8 r = 127, g = 127, b = 127, a = 255;
 
@@ -65,6 +68,7 @@ int main(int argc, char* argv[])
 
 		Game->SetDisplayColour(r, g, b, a);
 		Game->GameUpdate(PlayerStartX, PlayerStartY);
+		Ents->AddEntity("Player", false);
 	}
 
 	delete Game;
