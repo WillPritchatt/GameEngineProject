@@ -1,45 +1,17 @@
 #include "bitmap.h"
-#include <string>
 
-
-bitmap::bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool useTransparency)
+// Constructor for the bitmap, transparency is true by default in header.
+bitmap::bitmap(SDL_Renderer* renderer, string& fileName, int xpos, int ypos, bool useTransparency)
 {
 	m_pRenderer = renderer;
 
-	m_pBitmapSurface = SDL_LoadBMP(fileName.c_str());
-	if (!m_pBitmapSurface)
-	{
-		printf("SURFACE for bitmap '%s' not loaded! \n", fileName.c_str());
-		printf("%s\n", SDL_GetError());
-	}
-	else 
-	{
-		if (useTransparency)
-		{
-			Uint32 colourKey = SDL_MapRGB(m_pBitmapSurface->format, 255, 0, 255);
-			SDL_SetColorKey(m_pBitmapSurface, SDL_TRUE, colourKey);
-		}
-
-		m_pBitmapTexture = Load(fileName);
-		if (!m_pBitmapTexture) 
-		{
-			m_pBitmapTexture = SDL_CreateTextureFromSurface(m_pRenderer, m_pBitmapSurface);
-			if (!m_pBitmapTexture)
-			{
-				printf("TEXTURE for bitmap '%s' not loaded! \n", fileName.c_str());
-				printf("%s\n", SDL_GetError());
-			}
-			else
-			{
-				textures.insert(std::pair<std::string, SDL_Texture*>(fileName, m_pBitmapTexture));
-			}
-		}
-	}
+	if (TextureManager::GetInstance()->Load(fileName, useTransparency, renderer, &m_pBitmapTexture, &m_pBitmapSurface))
+		std::cout << "Error loading bitmap" << std::endl;
 
 	m_x = xpos;
 	m_y = ypos;
 }
-
+// Draws the bitmap if there is a loaded texture
 void bitmap::Draw()
 {
 	if (m_pBitmapTexture)
@@ -49,6 +21,7 @@ void bitmap::Draw()
 	}
 }
 
+// Sets Bitmap Position
 void bitmap::SetPos(int X, int Y)
 {
 	m_x = X;
@@ -68,6 +41,7 @@ bitmap::~bitmap()
 	}
 }
 
+// Checks to see if a texture has already been loaded before loading a texture to memory;
 SDL_Texture* bitmap::Load(std::string fileName)
 {
 	SDL_Texture* m_pBitmapTexture = nullptr;

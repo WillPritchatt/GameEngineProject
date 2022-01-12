@@ -2,8 +2,9 @@
 
 #include <map>
 #include <string>
-#include <SDL.h>
 #include <SDL_render.h>
+#include <IOstream>
+#include "TextureManager.h"
 
 struct SDL_Surface;
 struct SDL_Texture;
@@ -19,7 +20,7 @@ private:
 	int m_x, m_y;
 
 public:
-	bitmap(SDL_Renderer* renderer, string fileName, int xpos, int ypos, bool useTransparency = false);
+	bitmap(SDL_Renderer* renderer, string& fileName, int xpos, int ypos, bool useTransparency = true);
 	~bitmap();
 
 	SDL_Texture* Load(std::string fileName);

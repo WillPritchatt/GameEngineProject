@@ -1,5 +1,4 @@
 #include "input.h"
-#include <string>
 
 void input::Update(void)
 {
@@ -58,6 +57,7 @@ bool input::KeyIsPressed(SDL_Scancode key)
 {
 	return m_keyboardState[key];
 }
+
 
 input::input()
 {

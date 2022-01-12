@@ -1,10 +1,16 @@
-#ifndef GAME_H
-#define GAME_H
+#pragma once
 #include <SDL.h>
 #include <stdio.h>
 #include <SDL_TTF.h>
-class bitmap;
-class font;
+#include "bitmap.h"
+#include "SceneManager.h"
+#include "Player.h"
+#include "World.h"
+#include "EnemyAI.h"
+#include <vector>
+
+// Enum of all the sprite types handled by the Scene Manager
+enum class SpriteTypes { Enemy, Wall, Floor, Item, None };
 
 class game
 {
@@ -12,25 +18,35 @@ private:
 	SDL_Window* m_Window;
 	SDL_Renderer* m_Renderer;
 
-	bitmap* m_Machokip;
+	Player* m_Player;
 
-	font* m_DrawFont;
+	World* m_World;
 
-	TTF_Font* m_pSmallFont;
-	TTF_Font* m_pBigFont;
+	SceneManager* m_S_Manager;
 
-	int m_PlayerX;
-	int m_PlayerY;
+	std::vector<EnemyAI*> enemies;
+	std::vector<bitmap*> walls;
+	std::vector<bitmap*> floors;
+
+	std::vector<int> Positions;
+	// List of positions from the scene manager
+	std::vector<std::vector<int>> WallPos;
+	std::vector<std::vector<int>> FloorPos;
+	std::vector<std::vector<int>> EnemyPos;
+	std::vector<std::vector<int>> ItemPos;
 
 public:
-	game(int X, int Y);
+	game();
 	~game();
 
-	void GameUpdate(int posX, int posY);
+	void GameUpdate();
 
-	void SpawnBitmap(int posX, int posY);
+	void SpawnBitmap(std::string FileLoc, SpriteTypes Type = SpriteTypes::None);
 
 	void SetDisplayColour(int r, int g, int b, int a);
+
+	Player* GetPlayer();
+	SceneManager* GetManager();
 };
-#endif
+
 

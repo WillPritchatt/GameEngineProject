@@ -7,12 +7,12 @@
 #include "EntityManager.h"
 #undef main
 
+// Main loop of the engine
 int main(int argc, char* argv[])
 {
-	int PlayerStartX = 50;
-	int PlayerStartY = 50;
-
-	game* Game = new game(PlayerStartX, PlayerStartY);
+	game* Game = new game();
+	Player* player = Game->GetPlayer();
+	SceneManager* Manager = Game->GetManager();
 	input* Input = new input();
 
 	EntityManager* Ents = new EntityManager();
@@ -21,7 +21,11 @@ int main(int argc, char* argv[])
 
 	while (Game&&Input)
 	{
+		int xPlayerPos = player->GetPos()[0];
+		int yPlayerPos = player->GetPos()[1];
 		Input->Update();
+
+		// Input handling is done in main as input crashed when used anywhere else
 		if (Input->KeyIsPressed(SDL_SCANCODE_R)) 
 		{
 			r++;
@@ -42,33 +46,47 @@ int main(int argc, char* argv[])
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_W))
 		{
-			PlayerStartY -= 1;
+			 yPlayerPos -= 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_A))
 		{
-			PlayerStartX -= 1;
+			xPlayerPos -= 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_S))
 		{
-			PlayerStartY += 1;
+			yPlayerPos += 1;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_D))
 		{
-			PlayerStartX += 1;
+			xPlayerPos += 1;
 		}
 
-		if (Input->KeyIsPressed(SDL_SCANCODE_SPACE))
+		// Input to change between scene 1 and scene 2
+		if (Input->KeyIsPressed(SDL_SCANCODE_1))
 		{
-			Game->SpawnBitmap(50, 50);
+			Manager->SavePlayer(Manager->HoldSceneName , player->GetPos());
+			Manager->LoadScene("Scene1");
+			Manager->NewScene = true;
+
 		}
 
+		if (Input->KeyIsPressed(SDL_SCANCODE_2))
+		{
+			Manager->SavePlayer(Manager->HoldSceneName, player->GetPos());
+			Manager->LoadScene("Scene2");
+			Manager->NewScene = true;
+		}
 
+		vector<int> Positions;
+		Positions.push_back(xPlayerPos);
+		Positions.push_back(yPlayerPos);
+		player->SetPos(Positions);
 		Game->SetDisplayColour(r, g, b, a);
-		Game->GameUpdate(PlayerStartX, PlayerStartY);
-		Ents->AddEntity("Player", false);
+		Game->GameUpdate();
+		//Ents->AddEntity("Player", false);
 	}
 
 	delete Game;

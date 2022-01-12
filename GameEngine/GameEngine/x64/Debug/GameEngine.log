@@ -1,4 +1,1 @@
-﻿  EntityManager.cpp
-  main.cpp
-  Generating Code...
-C:\Users\Administrator\Documents\Github\GameEngineProject\GameEngine\GameEngine\EntityManager.cpp(19): error C4716: 'EntityManager::FindEntity': must return a value
+﻿  GameEngine.vcxproj -> C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\x64\Debug\GameEngine.exe

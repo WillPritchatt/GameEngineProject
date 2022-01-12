@@ -1,18 +1,13 @@
 #include "game.h"
-#include "bitmap.h"
-#include "font.h"
-#include <string>
 
-#include<SDL.h>
-
-game::game(int X, int Y)
+// Game Constructor
+game::game()
 {
 	//SDL stuff
 	m_Window = nullptr;
 	m_Renderer = nullptr;
 
-	m_PlayerX = 50;
-	m_PlayerY = 50;
+	m_World = new World();
 
 	//start_up
 	SDL_Init(SDL_INIT_VIDEO);
@@ -24,7 +19,7 @@ game::game(int X, int Y)
 		250,               // initial x position
 		50,                // initial y position
 		1280,               // width in pixels
-		1080,               // height in pixels
+		1000,               // height in pixels
 		0                  // window behavior flags
 		);
 
@@ -49,32 +44,27 @@ game::game(int X, int Y)
 		getchar();
 		return;
 	}
+	// Creates the scene and generates references to all the objects in the scene
 
-	m_Machokip = new bitmap(m_Renderer, "../Assets/Sprites/Machokip.bmp", m_PlayerX, m_PlayerY, true);
+	m_S_Manager = new SceneManager();
 
-	m_DrawFont = new font();
+	// Floor is 512 x 512
+	SpawnBitmap("../Assets/Sprites/StoneFloor.bmp", SpriteTypes::Floor);
 
-	m_pSmallFont = TTF_OpenFont("../Assets/Fonts/DejaVuSans.ttf", 15);
-	m_pBigFont = TTF_OpenFont("../Assets/Fonts/DejaVuSans.ttf", 60);
+	// Wall is 128 x 128
+	SpawnBitmap("../Assets/Sprites/StoneWall.bmp", SpriteTypes::Wall);
+
+	// Enemy is 151 x 115
+	SpawnBitmap("../Assets/Sprites/Slime.bmp", SpriteTypes::Enemy);
+
+	// Player is 160 x 230
+	string FileLoc = "../Assets/Sprites/Machokip.bmp";
+	Positions = m_S_Manager->GetPlayerStart();
+	m_Player = new Player(m_Renderer, FileLoc, Positions);
 }
 
 game::~game()
 {
-	if (m_pBigFont)
-	{
-		TTF_CloseFont(m_pBigFont);
-	}
-
-	if (m_pSmallFont) 
-	{
-		TTF_CloseFont(m_pSmallFont);
-	}
-
-	if (m_Machokip) 
-	{
-		delete m_Machokip;
-	}
-
 	if (m_Renderer)
 	{
 		SDL_DestroyRenderer(m_Renderer);
@@ -86,32 +76,106 @@ game::~game()
 	}
 }
 
-void game::GameUpdate(int posX, int posY)
+// Calls the update components of the game objects once every 60th of a second
+void game::GameUpdate()
 {
 	// Do this once
 	SDL_RenderClear(m_Renderer);
 
-	m_Machokip->SetPos(posX, posY);
+	//loads new scene
+	if (m_S_Manager->NewScene)
+	{
+		floors.clear();
+		SpawnBitmap("../Assets/Sprites/StoneFloor.bmp", SpriteTypes::Floor);
+		walls.clear();
+		SpawnBitmap("../Assets/Sprites/StoneWall.bmp", SpriteTypes::Wall);
+		enemies.clear();
+		SpawnBitmap("../Assets/Sprites/Slime.bmp", SpriteTypes::Enemy);
+		m_Player->SetPos(m_S_Manager->GetPlayerStart());
+		m_S_Manager->NewScene = false;
+	}
 
-	m_Machokip->Draw();
+	m_World->Update();
 
-	/*m_DrawFont->UpdateText("Small Red", 50, 10, m_pSmallFont, { 255, 0, 0 }, m_Renderer);
-	m_DrawFont->UpdateText("Small Blue", 50, 40, m_pSmallFont, { 0, 0, 255 }, m_Renderer);
+	for (bitmap* floor : floors)
+	{
+		floor->Draw();
+	}
 
-	char char_array[] = "Big White";
-	m_DrawFont->UpdateText(char_array, 50, 70, m_pBigFont, { 255, 255, 255 }, m_Renderer);
-	
-	string myString = "Big Green";
-	m_DrawFont->UpdateText(myString, 50, 130, m_pBigFont, { 0, 255, 0 }, m_Renderer);*/
+	for (bitmap* wall : walls)
+	{
+		wall->Draw();
+	}
+
+	for (EnemyAI* enemy : enemies)
+	{
+		enemy->EnemyUpdate();
+	}
+
+	m_Player->PlayerUpdate();
 
 	SDL_RenderPresent(m_Renderer);
 
 	SDL_Delay(16);
 }
 
-void game::SpawnBitmap(int posX, int posY)
+// Gets the list of bitmaps from the Scene Manager by type of sprite
+void game::SpawnBitmap(std::string FileLoc, SpriteTypes Type)
 {
-	m_Machokip = new bitmap(m_Renderer, "../Assets/Sprites/Machokip.bmp", m_PlayerX, m_PlayerY, true);
+	switch (Type)
+	{
+	case SpriteTypes::Floor:
+		FloorPos = m_S_Manager->GetObjStart("Floor");
+		for (int i = 0; i < FloorPos.size(); i++)
+		{
+			std::vector<int> TempPositions;
+			for (int j = 0; j < FloorPos[i].size(); j++)
+			{
+				TempPositions.push_back(FloorPos[i][j]);
+			}
+			floors.push_back(new bitmap(m_Renderer, FileLoc, TempPositions[0], TempPositions[1]));
+		}
+		break;
+
+	case SpriteTypes::Wall:
+		WallPos = m_S_Manager->GetObjStart("Wall");
+		for (int i = 0; i < WallPos.size(); i++)
+		{
+			std::vector<int> TempPositions;
+			for (int j = 0; j < WallPos[i].size(); j++)
+			{
+				TempPositions.push_back(WallPos[i][j]);
+			}
+			walls.push_back(new bitmap(m_Renderer, FileLoc, TempPositions[0], TempPositions[1]));
+		}
+		break;
+
+	case SpriteTypes::Enemy:
+		EnemyPos = m_S_Manager->GetObjStart("Enemy");
+		for (int i = 0; i < EnemyPos.size(); i++)
+		{
+			std::vector<int> TempPositions;
+			for (int j = 0; j < EnemyPos[i].size(); j++)
+			{
+				TempPositions.push_back(EnemyPos[i][j]);
+			}
+			enemies.push_back(new EnemyAI(m_Renderer, FileLoc, TempPositions));
+		}
+		break;
+
+	/*case SpriteTypes::Item:
+		ItemPos = m_S_Manager->GetObjStart("Item");
+		for (int i = 0; i < ItemPos.size(); i++)
+		{
+			std::vector<int> TempPositions;
+			for (int j = 0; j < ItemPos[i].size(); j++)
+			{
+				TempPositions.push_back(ItemPos[i][j]);
+			}
+			new bitmap(m_Renderer, FileLoc, TempPositions[0], TempPositions[1]);
+		}
+		break;*/
+	}
 }
 
 void game::SetDisplayColour(int r, int g, int b, int a)
@@ -126,4 +190,16 @@ void game::SetDisplayColour(int r, int g, int b, int a)
 			a				 // alpha
 			);
 	}
+}
+
+// returns reference of player to main for input
+Player* game::GetPlayer()
+{
+	return m_Player;
+}
+
+// returns reference of scene manager to main for input
+SceneManager* game::GetManager()
+{
+	return m_S_Manager;
 }
