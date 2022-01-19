@@ -5,6 +5,7 @@ void input::Update(void)
 	m_keyboardState = SDL_GetKeyboardState(NULL);
 	while (SDL_PollEvent(&m_event) != NULL)
 	{
+		ImGui_ImplSDL2_ProcessEvent(&m_event);
 		//check for key down
 		if (m_event.type == SDL_KEYDOWN) 
 		{
@@ -61,6 +62,7 @@ bool input::KeyIsPressed(SDL_Scancode key)
 
 input::input()
 {
+
 }
 
 input::~input()

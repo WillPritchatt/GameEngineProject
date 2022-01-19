@@ -1,13 +1,16 @@
 #pragma once
+//SDL & STD
 #include <SDL.h>
-#include <stdio.h>
 #include <SDL_TTF.h>
+#include <stdio.h>
+#include <vector>
+//Own Code
 #include "bitmap.h"
 #include "SceneManager.h"
 #include "Player.h"
 #include "World.h"
 #include "EnemyAI.h"
-#include <vector>
+
 
 // Enum of all the sprite types handled by the Scene Manager
 enum class SpriteTypes { Enemy, Wall, Floor, Item, None };
@@ -44,6 +47,12 @@ public:
 	void SpawnBitmap(std::string FileLoc, SpriteTypes Type = SpriteTypes::None);
 
 	void SetDisplayColour(int r, int g, int b, int a);
+
+	void PreRender();
+	void PostRender();
+
+	SDL_Window* GetSdlWindow();
+	SDL_Renderer* GetRenderer();
 
 	Player* GetPlayer();
 	SceneManager* GetManager();

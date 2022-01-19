@@ -19,6 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\imgui-master\backends\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\imgui-master\imgui.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="..\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="..\imgui_sdl-master\imgui_sdl.cpp" />
     <ClCompile Include="bitmap.cpp" />
     <ClCompile Include="EnemyAI.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -33,6 +40,14 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\imgui-master\backends\imgui_impl_sdl.h" />
+    <ClInclude Include="..\imgui-master\imconfig.h" />
+    <ClInclude Include="..\imgui-master\imgui.h" />
+    <ClInclude Include="..\imgui-master\imgui_internal.h" />
+    <ClInclude Include="..\imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="..\imgui-master\imstb_textedit.h" />
+    <ClInclude Include="..\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="..\imgui_sdl-master\imgui_sdl.h" />
     <ClInclude Include="bitmap.h" />
     <ClInclude Include="componentBase.hpp" />
     <ClInclude Include="EnemyAI.h" />
@@ -102,7 +117,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\SDL2-2.0.10\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\SDL2-2.0.10\include;$(SolutionDir)\imgui-master;$(SolutionDir)\imgui_sdl-master;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\SDL2-2.0.10\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

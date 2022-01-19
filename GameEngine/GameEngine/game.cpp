@@ -79,9 +79,6 @@ game::~game()
 // Calls the update components of the game objects once every 60th of a second
 void game::GameUpdate()
 {
-	// Do this once
-	SDL_RenderClear(m_Renderer);
-
 	//loads new scene
 	if (m_S_Manager->NewScene)
 	{
@@ -113,7 +110,16 @@ void game::GameUpdate()
 	}
 
 	m_Player->PlayerUpdate();
+}
 
+void game::PreRender()
+{
+	// Do this once
+	SDL_RenderClear(m_Renderer);
+}
+
+void game::PostRender()
+{
 	SDL_RenderPresent(m_Renderer);
 
 	SDL_Delay(16);
@@ -190,6 +196,16 @@ void game::SetDisplayColour(int r, int g, int b, int a)
 			a				 // alpha
 			);
 	}
+}
+
+SDL_Window* game::GetSdlWindow()
+{
+	return m_Window;
+}
+
+SDL_Renderer* game::GetRenderer()
+{
+	return m_Renderer;
 }
 
 // returns reference of player to main for input

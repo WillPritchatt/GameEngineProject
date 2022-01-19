@@ -1,4 +1,4 @@
-PlayerStart[211,165]
+PlayerStart[128,128]
 Wall[0,0]
 Wall[0,128]
 Wall[0,256]

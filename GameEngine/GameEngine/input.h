@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include <iostream>
 #include <string>
+#include "backends/imgui_impl_sdl.h"
 
 enum KEYS_PRESSED_LIST
 {
