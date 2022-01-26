@@ -7,6 +7,24 @@ SceneManager::SceneManager()
 	LoadScene("Scene1");
 }
 
+//Scene JSON Data Example
+//{
+//"Scene 1" : { //Scene Name
+//	"Floor" : { //Object Tag
+//		"FileLoc" : "StoneFloor.bmp", //Object File Location
+//		"Positions : [
+//		"0,0",
+//		"0, 128",
+//		"128, 0",
+//		"128, 128"]
+//		
+//
+//
+//
+//
+
+
+
 // Opens the txt file containing the scene data
 void SceneManager::LoadScene(std::string SceneName)
 {
