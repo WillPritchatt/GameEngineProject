@@ -75,6 +75,9 @@
     <ClCompile Include="..\imgui-master\backends\imgui_impl_sdl.cpp">
       <Filter>imGui</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuiManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmap.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="..\imgui-master\backends\imgui_impl_sdl.h">
       <Filter>imGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

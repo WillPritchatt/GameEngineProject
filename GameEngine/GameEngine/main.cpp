@@ -1,10 +1,6 @@
 //SDL
 #include <SDL.h>
-//IMGUI
-#include "imgui.h"
-//#include "backends/imgui_impl_sdl.h"
-#include "imgui_sdl.h"
-#include "imgui_internal.h"
+
 //STD
 #include <string>
 //Own Code
@@ -13,6 +9,7 @@
 #include "bitmap.h"
 #include "gameObject.h"
 #include "EntityManager.h"
+#include "ImGuiManager.h"
 #undef main
 
 // Main loop of the engine
@@ -20,27 +17,13 @@ int main(int argc, char* argv[])
 {
 	game* Game = new game();
 	Player* player = Game->GetPlayer();
-	SceneManager* Manager = Game->GetManager();
+	SceneManager* SManager = Game->GetManager();
 	input* Input = new input();
+	ImGuiManager* IGManager = new ImGuiManager(Game->GetSdlWindow(), Game->GetRenderer());
 
 	EntityManager* Ents = new EntityManager();
 
 	Uint8 r = 127, g = 127, b = 127, a = 255;
-
-	//imGUI setup
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	SDL_DisplayMode DisplayMode;
-	SDL_GetCurrentDisplayMode(0, &DisplayMode);
-	ImGuiSDL::Initialize(Game->GetRenderer(), DisplayMode.w, DisplayMode.h);
-	ImGuiIO& io = ImGui::GetIO();
-	(void)io;
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
-	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
-	ImGui::StyleColorsDark();
-
-	ImGui_ImplSDL2_InitForOpenGL(Game->GetSdlWindow(), SDL_GL_GetCurrentContext());
 
 
 	while (Game&&Input)
@@ -91,16 +74,16 @@ int main(int argc, char* argv[])
 		// input to change between scene 1 and scene 2
 		if (Input->KeyIsPressed(SDL_SCANCODE_1))
 		{
-			Manager->SavePlayer(Manager->HoldSceneName , player->GetPos());
-			Manager->LoadScene("scene1");
-			Manager->NewScene = true;
+			SManager->SavePlayer(SManager->HoldSceneName , player->GetPos());
+			SManager->LoadScene("scene1");
+			SManager->NewScene = true;
 		}
 
 		if (Input->KeyIsPressed(SDL_SCANCODE_2))
 		{
-			Manager->SavePlayer(Manager->HoldSceneName, player->GetPos());
-			Manager->LoadScene("scene2");
-			Manager->NewScene = true;
+			SManager->SavePlayer(SManager->HoldSceneName, player->GetPos());
+			SManager->LoadScene("scene2");
+			SManager->NewScene = true;
 		}
 
 
@@ -114,21 +97,7 @@ int main(int argc, char* argv[])
 		
 		Game->GameUpdate();
 
-		ImGui::NewFrame();
-		
-		ImGui_ImplSDL2_NewFrame(Game->GetSdlWindow());
-		bool show = true;
-
-		ImGui::Begin("test");
-		ImGui::End();
-
-		ImGui::ShowDemoWindow(&show);
-
-		ImGui::Render();
-		ImGuiSDL::Render(ImGui::GetDrawData());
-		
-		
-
+		IGManager->UpdateImGuiWindows();
 		
 		Game->PostRender();
 
