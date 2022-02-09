@@ -10,7 +10,10 @@
 #include "Player.h"
 #include "World.h"
 #include "EnemyAI.h"
+//Json Parser
+#include <nlohmann/json.hpp>
 
+using json = nlohmann::json;
 
 // Enum of all the sprite types handled by the Scene Manager
 enum class SpriteTypes { Enemy, Wall, Floor, Item, None };
@@ -53,6 +56,8 @@ public:
 
 	SDL_Window* GetSdlWindow();
 	SDL_Renderer* GetRenderer();
+
+	json AssetsList;
 
 	Player* GetPlayer();
 	SceneManager* GetManager();

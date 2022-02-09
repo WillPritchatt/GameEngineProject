@@ -78,6 +78,9 @@
     <ClCompile Include="ImGuiManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImHierarchyWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitmap.h">
@@ -144,6 +147,9 @@
       <Filter>imGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImHierarchyWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

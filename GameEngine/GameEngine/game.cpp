@@ -48,15 +48,19 @@ game::game()
 
 	m_S_Manager = new SceneManager();
 
-
-	//JSON Data Structure exmple
+	//JSON Data Structure exmple for TileMap
 	//{
 	//"name" : "Stone Wall",
 	//"fileloc" : "StoneWall.bmp",
-	//"tag" : "Wall",
-	//"sizeX" : "128",
-	//"sizeY" : "128",
-	//}  
+	//"ID" : "1",
+	//}
+
+	std::ifstream i("AssetsList.json");
+	i >> AssetsList;
+	if (AssetsList.empty())
+	{
+
+	}
 
 	// Floor is 512 x 512
 	SpawnBitmap("../Assets/Sprites/StoneFloor.bmp", SpriteTypes::Floor);
@@ -138,38 +142,8 @@ void game::PostRender()
 // Gets the list of bitmaps from the Scene Manager by type of sprite
 void game::SpawnBitmap(std::string FileLoc, SpriteTypes Type)
 {
-	/*
-	FloorPos = m_S_Manager->GetObjStart("Floor");
-	WallPos = m_S_Manager->GetObjStart("Wall");
-	EnemyPos = m_S_Manager->GetObjStart("Enemy");
-	for (int i = 0; i < FloorPos.size(); i++)
-		{
-			std::vector<int> TempPositions;
-			for (int j = 0; j < FloorPos[i].size(); j++)
-			{
-				TempPositions.push_back(FloorPos[i][j]);
-			}
-			floors.push_back(new bitmap(m_Renderer, FileLoc, TempPositions[0], TempPositions[1]));
-		}
-	for (int i = 0; i < WallPos.size(); i++)
-		{
-			std::vector<int> TempPositions;
-			for (int j = 0; j < WallPos[i].size(); j++)
-			{
-				TempPositions.push_back(WallPos[i][j]);
-			}
-			walls.push_back(new bitmap(m_Renderer, FileLoc, TempPositions[0], TempPositions[1]));
-		}
-	for (int i = 0; i < EnemyPos.size(); i++)
-		{
-			std::vector<int> TempPositions;
-			for (int j = 0; j < EnemyPos[i].size(); j++)
-			{
-				TempPositions.push_back(EnemyPos[i][j]);
-			}
-			enemies.push_back(new EnemyAI(m_Renderer, FileLoc, TempPositions));
-		}
-	*/
+
+	
 	
 	switch (Type)
 	{

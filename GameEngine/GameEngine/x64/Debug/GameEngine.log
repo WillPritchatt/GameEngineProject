@@ -1,1 +1,51 @@
-﻿  GameEngine.vcxproj -> C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\x64\Debug\GameEngine.exe
+﻿  imgui_impl_sdl.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  imgui_sdl.cpp
+  bitmap.cpp
+  EnemyAI.cpp
+  EntityManager.cpp
+  Font.cpp
+  game.cpp
+  gameObject.cpp
+  ImGuiManager.cpp
+  ImHierarchyWindow.cpp
+  input.cpp
+  main.cpp
+  Player.cpp
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(19,23): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(19,17): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(27,22): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(28,22): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(35,20): warning C4244: '=': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\Player.cpp(36,20): warning C4244: '=': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+  SceneManager.cpp
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\SceneManager.cpp(141,4): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\SceneManager.cpp(144,4): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\SceneManager.cpp(171,4): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\GameEngine\SceneManager.cpp(174,4): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  TextureManager.cpp
+  Generating Code...
+  Compiling...
+  World.cpp
+  Generating Code...
+  GameEngine.vcxproj -> C:\Users\Administrator\Documents\GitHub\GameEngineProject\GameEngine\x64\Debug\GameEngine.exe

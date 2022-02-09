@@ -8,23 +8,18 @@ SceneManager::SceneManager()
 }
 
 //Scene JSON Data Example
+//Scene Shape limited to Quads
+//In Example array, 1 = Wall, 2 = Floor, 3 = Door
 //{
-//"Scene 1" : { //Scene Name
-//	"Floor" : { //Object Tag
-//		"FileLoc" : "StoneFloor.bmp", //Object File Location
-//		"Positions : [
-//		"0,0",
-//		"0, 128",
-//		"128, 0",
-//		"128, 128"]}
-//  "Wall
+//"NoCol" : 5, //Might not need this
+//"NoRow" : 5, //Might not need this
+//"1" : [1, 1, 1, 1, 1],
+//"2" : [1, 2, 2, 2, 1],
+//"3" : [1, 2, 2, 2, 3],
+//"4" : [1, 2, 2, 2, 1],
+//"5" : [1, 1, 3, 1, 1]
+//}
 //
-//
-//
-//
-//
-
-
 
 // Opens the txt file containing the scene data
 void SceneManager::LoadScene(std::string SceneName)

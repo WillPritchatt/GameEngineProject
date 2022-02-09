@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	Player* player = Game->GetPlayer();
 	SceneManager* SManager = Game->GetManager();
 	input* Input = new input();
-	ImGuiManager* IGManager = new ImGuiManager(Game->GetSdlWindow(), Game->GetRenderer());
+	ImGuiManager* IGManager = new ImGuiManager(Game, SManager);
 
 	EntityManager* Ents = new EntityManager();
 

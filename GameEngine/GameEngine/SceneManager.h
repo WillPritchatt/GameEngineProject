@@ -4,7 +4,11 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <map>
 #include <algorithm>// replace
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 class SceneManager
 {
@@ -18,6 +22,8 @@ public:
 	void LoadScene(std::string SceneName);
 	void SavePlayer(std::string SceneName, std::vector<int> PlayerPos);
 
+	
+
 	bool NewScene;
 
 private:
@@ -27,6 +33,10 @@ private:
 
 	std::vector<std::string> ReadResult;
 	std::vector<std::string> TempFiles;
+
+	std::map<int, std::string> Tiles;
+
+	json SceneJson;
 
 	void DrawScene(std::vector<std::string> SceneData);
 	std::string WallLoc = "../Assets/Sprites/StoneWall.bmp";

@@ -1,15 +1,17 @@
 #include "ImGuiManager.h"
 
-ImGuiManager::ImGuiManager(SDL_Window* window, SDL_Renderer* renderer)
+ImGuiManager::ImGuiManager(game* Game, SceneManager* SManager)
 {
-	m_window = window;
-	m_renderer = renderer;
+	m_game = Game;
+	m_sManager = SManager;
+	m_window = m_game->GetSdlWindow();
+	m_renderer = m_game->GetRenderer();;
 	//imGUI setup
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	SDL_DisplayMode DisplayMode;
 	SDL_GetCurrentDisplayMode(0, &DisplayMode);
-	ImGuiSDL::Initialize(renderer, DisplayMode.w, DisplayMode.h);
+	ImGuiSDL::Initialize(m_renderer, DisplayMode.w, DisplayMode.h);
 	ImGuiIO& io = ImGui::GetIO();
 	(void)io;
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -17,7 +19,7 @@ ImGuiManager::ImGuiManager(SDL_Window* window, SDL_Renderer* renderer)
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 	ImGui::StyleColorsDark();
 
-	ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_GetCurrentContext());
+	ImGui_ImplSDL2_InitForOpenGL(m_window, SDL_GL_GetCurrentContext());
 }
 
 ImGuiManager::~ImGuiManager()
