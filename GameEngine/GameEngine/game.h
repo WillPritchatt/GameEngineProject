@@ -4,6 +4,8 @@
 #include <SDL_TTF.h>
 #include <stdio.h>
 #include <vector>
+#include <fstream>
+#include <filesystem>
 //Own Code
 #include "bitmap.h"
 #include "SceneManager.h"
@@ -14,6 +16,7 @@
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
+namespace fs = std::filesystem;
 
 // Enum of all the sprite types handled by the Scene Manager
 enum class SpriteTypes { Enemy, Wall, Floor, Item, None };
@@ -29,6 +32,8 @@ private:
 	World* m_World;
 
 	SceneManager* m_S_Manager;
+
+	std::vector<std::string> ListOfFilePaths;
 
 	std::vector<EnemyAI*> enemies;
 	std::vector<bitmap*> walls;

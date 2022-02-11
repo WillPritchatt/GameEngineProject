@@ -55,11 +55,34 @@ game::game()
 	//"ID" : "1",
 	//}
 
-	std::ifstream i("AssetsList.json");
-	i >> AssetsList;
-	if (AssetsList.empty())
+	if (!fs::exists("../AssetsList/Sprites/AssetsList.txt"))
 	{
+		int count = 1;
+		ofstream AssetsFile("../AssetsList/Sprites/AssetsList.txt", std::ofstream::trunc);
+		for (const fs::path entry : std::filesystem::directory_iterator("../Assets/Sprites"))
+		{
+			//add all items in sprites directory to the Assets List json
+			std::string path = entry.u8string().substr(entry.u8string().find("Sprites")+8);
+			std::string name = "";
+			for (int each = 0; each < path.size() - 4; each++)
+			{
+				name += path[each];
+			}
+			AssetsList["name"] = name;
+			AssetsList["fileLoc"] = path;
+			AssetsList["ID"] = count;
+			count++;
+			AssetsFile << AssetsList << "\n";
+			std::cout << AssetsList << std::endl;
+		}
+		AssetsFile.close();
+	}
 
+	else
+	{
+		//check for new assets
+		ifstream AssetsFile("../AssetsList/Sprites/AssetsList.txt");
+		AssetsFile >> AssetsList;
 	}
 
 	// Floor is 512 x 512
